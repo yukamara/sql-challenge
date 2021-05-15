@@ -1,0 +1,38 @@
+# SQL Challenge schema documentation for the employee
+
+
+departments as d
+-
+dept_no CHAR(4) PK
+dept_name VARCHAR(30) 
+
+dept_emp as de
+-
+emp_no INT PK
+dept_no CHAR(4) FK >- d.dept_no
+
+dept_managers as dm
+-
+dept_no CAR(4) FK >- d.dept_no
+emp_no INT FK >- de.emp_no
+
+employees as e
+-
+emp_no INT FK >- de.emp_no
+emp_title_id CHAR(4) FK >- t.title_id
+birth_date DATE
+first_name VARCHAR(30)
+last_name VARCHAR(30)
+sex CHAR
+hire_date DATE
+
+salaries as s
+-
+emp_no INT FK >- de.emp_no
+salary INT
+
+titles as t
+-
+title_id CHAR(5) PK
+title VARCHAR(30) PK
+
