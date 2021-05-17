@@ -22,7 +22,7 @@ CREATE TABLE "dept_emp" (
 );
 
 CREATE TABLE "dept_managers" (
-    "dept_no" CAR(4)   NOT NULL,
+    "dept_no" CHAR(4)   NOT NULL,
     "emp_no" INT   NOT NULL
 );
 
