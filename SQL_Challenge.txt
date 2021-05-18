@@ -13,7 +13,7 @@ dept_no CHAR(4) FK >- d.dept_no
 
 dept_managers as dm
 -
-dept_no CAR(4) FK >- d.dept_no
+dept_no CHAR(4) FK >- d.dept_no
 emp_no INT FK >- de.emp_no
 
 employees as e
