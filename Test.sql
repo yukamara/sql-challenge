@@ -33,11 +33,11 @@ FROM titles
 CREATE TABLE employees (
 	emp_no VARCHAR(10) NOT NULL,
 	emp_title_id VARCHAR(10) NOT NULL,
-	birth_date DATE NOT NULL,
+	birth_date VARCHAR(30) NOT NULL,
 	first_name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(30) NOT NULL,
 	sex CHAR(1) NOT NULL,
-	hire_date DATE NOT NULL,
+	hire_date VARCHAR NOT NULL,
 	PRIMARY KEY(emp_no),
 	CONSTRAINT FK_title 
 		FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
@@ -105,7 +105,7 @@ SELECT *
 FROM salaries
 
 /* 
-1. List the following details for each employee: 
+Perform a query to return for each employee: 
 employee number, last name, first name, sex, and salary
 */
 
@@ -120,24 +120,21 @@ RIGHT JOIN salaries
 ON salaries.emp_no = employees.emp_no
 ORDER BY "Employee No.";
 
-/*
-2. List first name, last name, and hire date 
-for employees who were hired in 1986.
-*/
+-- List first name, last name, and hire date 
+-- for employees who were hired in 1986.
 
 SELECT
 	employees.first_name AS "First Name", 
 	employees.last_name AS "Last Name",
 	employees.hire_date AS "Date of Hire"
 FROM employees
-WHERE hire_date >= '19860101'
-	AND hire_date <= '19861231'
+WHERE SUBSTRING(hire_date, 7, 4) = 1986
 
 
 /*
-3. List the manager of each department with 
-the following information: department number, department name, 
-the manager's employee number, last name, first name.
+List the manager of each department with 
+the following information: department number, 
+department name, the manager's employee number, last name, first name.
 */
 SELECT
 	departments.dept_no AS "Department No.",
@@ -152,9 +149,9 @@ JOIN employees
 	ON dept_manager.emp_no = employees.emp_no;
 
 /*
-4. List the department of each employee with 
-the following information: employee number, 
-last name, first name, and department name.
+List the department of each employee 
+with the following information: 
+employee number, last name, first name, and department name.
 */
 SELECT
 	employees.emp_no AS "Employee No.",
@@ -169,7 +166,7 @@ JOIN departments
 ORDER BY "Employee No.";
 
 /*
-5. List first name, last name, and sex for employees 
+List first name, last name, and sex for employees 
 whose first name is "Hercules" and last names begin with "B."
 */
 SELECT
@@ -178,34 +175,9 @@ SELECT
 	employees.sex AS "Sex"
 FROM employees
 WHERE first_name = 'Hercules'
-AND SUBSTRING(last_name, 1, 1) = 'B';
+	and LEFT('last_name', 0) = 'B';
 	
-/*
-6. List all employees in the Sales department, 
-including their employee number, 
-last name, first name, and department name.
-*/
 
-SELECT 
-	employees.emp_no AS "Employee No.",
-	employees.last_name AS "Last Name",
-	employees.first_name AS "First Name"
-FROM employees
-WHERE emp_no IN
-	(
-	SELECT emp_no AS "Employee, No."
-	 FROM dept_emp
-	 WHERE dept_no IN
-		(
-		SELECT departments.dept_no AS "Department Name."
-		FROM departments
-		WHERE dept_name = 'Sales'
-		)
-	)
-
-SELECT *
-FROM departments
-WHERE dept_name = Sales
 
 
 	
