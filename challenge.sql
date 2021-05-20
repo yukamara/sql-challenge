@@ -193,7 +193,7 @@ SELECT
 FROM employees
 WHERE emp_no IN
 	(
-	SELECT emp_no AS "Employee, No."
+	SELECT emp_no
 	 FROM dept_emp
 	 WHERE dept_no IN
 		(
@@ -203,9 +203,60 @@ WHERE emp_no IN
 		)
 	)
 
-SELECT *
-FROM departments
-WHERE dept_name = Sales
+SELECT
+	employees.emp_no AS "Employee No.",
+	employees.last_name AS "Last Name",
+	employees.first_name AS "First Name",
+	departments.dept_name AS "Department Name"
+FROM 
+	(
+	SELECT employees.emp_no, last_name, first_name, dept_no
+	FROM employees
+	INNER JOIN dept_emp
+	ON dept_emp.emp_no = employees.emp_no
+	)
+	AS employees
+INNER JOIN departments AS departments
+ON employees.dept_no = departments.dept_no
+WHERE dept_name = 'Sales'
 
+
+/*
+7. List all employees in the Sales and Development departments, including their 
+employee number, last name, first name, and department name.
+*/
+
+SELECT
+	employees.emp_no AS "Employee No.",
+	employees.last_name AS "Last Name",
+	employees.first_name AS "First Name",
+	departments.dept_name AS "Department Name"
+FROM 
+	(
+	SELECT employees.emp_no, last_name, first_name, dept_no
+	FROM employees
+	INNER JOIN dept_emp
+	ON dept_emp.emp_no = employees.emp_no
+	)
+	AS employees
+INNER JOIN departments 
+AS departments
+ON employees.dept_no = departments.dept_no
+WHERE dept_name = 'Sales'
+OR dept_name = 'Development'
+ORDER BY "Last Name";
+
+
+/*
+In descending order, list the frequency count of employee last names, 
+i.e., how many employees share each last name.
+*/
+
+SELECT
+	employees.last_name AS "Last Name",
+	COUNT(employees.last_name) AS "Frequency Count"
+FROM employees
+GROUP BY employees.last_name
+ORDER BY "Frequency Count" DESC;
 
 	
