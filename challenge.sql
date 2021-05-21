@@ -15,7 +15,7 @@ CREATE TABLE departments (
 
 -- Run a query to view the data
 SELECT *
-FROM departments
+FROM departments;
 --------------------------------------------------------
 --2. Table schema for titles and import data
 CREATE TABLE titles (
@@ -26,7 +26,8 @@ CREATE TABLE titles (
 
 -- Run a query to view the data
 SELECT *
-FROM titles
+FROM titles;
+
 --------------------------------------------------------
 
 --3. Table schema for dept_emp and import data
@@ -47,7 +48,7 @@ CREATE TABLE employees (
 
 -- Run a query to view the data
 SELECT *
-FROM employees
+FROM employees;
 
 --------------------------------------------------------
 --4. Table schema for dept_emp and import data
@@ -84,7 +85,7 @@ CREATE TABLE dept_manager (
 
 -- Run a query to view the data
 SELECT *
-FROM dept_manager
+FROM dept_manager;
 
 --------------------------------------------------------
 
@@ -102,7 +103,7 @@ CREATE TABLE salaries (
 
 -- Run a query to view the data
 SELECT *
-FROM salaries
+FROM salaries;
 
 /* 
 1. List the following details for each employee: 
@@ -131,7 +132,7 @@ SELECT
 	employees.hire_date AS "Date of Hire"
 FROM employees
 WHERE hire_date >= '19860101'
-	AND hire_date <= '19861231'
+	AND hire_date <= '19861231';
 
 
 /*
@@ -201,7 +202,7 @@ WHERE emp_no IN
 		FROM departments
 		WHERE dept_name = 'Sales'
 		)
-	)
+	);
 
 SELECT
 	employees.emp_no AS "Employee No.",
@@ -218,7 +219,7 @@ FROM
 	AS employees
 INNER JOIN departments AS departments
 ON employees.dept_no = departments.dept_no
-WHERE dept_name = 'Sales'
+WHERE dept_name = 'Sales';
 
 
 /*
@@ -258,5 +259,3 @@ SELECT
 FROM employees
 GROUP BY employees.last_name
 ORDER BY "Frequency Count" DESC;
-
-	

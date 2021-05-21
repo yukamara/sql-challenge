@@ -31,14 +31,15 @@ FROM titles
 
 --3. Table schema for dept_emp and import data
 CREATE TABLE employees (
-	emp_no VARCHAR(10) NOT NULL,
+	emp_no VARCHAR(10) PRIMARY KEY NOT NULL,
 	emp_title_id VARCHAR(10) NOT NULL,
-	birth_date VARCHAR(30) NOT NULL,
+	birth_date DATE NOT NULL,
 	first_name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(30) NOT NULL,
 	sex CHAR(1) NOT NULL,
-	hire_date VARCHAR NOT NULL,
-	PRIMARY KEY(emp_no),
+	hire_date DATE NOT NULL
+)
+	PRIMARY KEY(emp_no);
 	CONSTRAINT FK_title 
 		FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
 		ON DELETE NO ACTION    
